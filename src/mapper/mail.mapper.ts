@@ -80,6 +80,10 @@ export class MailMapper {
         }
     }
 
+
+  //  mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_BIRTHDAY, mailMapper.PARAMS_NHIS, mailMapper.PARAMS_RESIDENTAL_ADDRESS, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE, mailMapper.PARAMS_SCHOOL, mailMapper.PARAMS_CLASS_OR_FORM, mailMapper.PARAMS_SCHOOL_CONTACT, mailMapper.PARAMS_FORMER_CLUB
+
+
     async parseBody(body) {
         this._body = body[this._PARAMS_BODY] || null;
         this._subject = body[this._PARAMS_SUBJECT] || null;
@@ -91,10 +95,19 @@ export class MailMapper {
 
     }
 
-    async getMembershipEmail() {
-        this._SUBJECT_CONTENT = format(EmailMessaging.CONTACTUS_SUBJECT, this._subject)
-        this._HTML_CONTENT = format(EmailMessaging.CONTACTUS_CONTENT_HTML, this._body);
-        this._TEXT_CONTENT = format(EmailMessaging.CONTACTUS_CONTENT_TEXT, this._body);
+    async getMembershipEmail(body) {
+        this._PARAMS_NHIS = body[this._PARAMS_NHIS] || null;
+        this._PARAMS_BIRTHDAY = body[this._PARAMS_BIRTHDAY] || null;
+        this._PARAMS_RESIDENTAL_ADDRESS = body[this._PARAMS_RESIDENTAL_ADDRESS] || null;
+        this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN = body[this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN] || null;
+        this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE = body[this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE] || null;
+        this._PARAMS_SCHOOL_CONTACT = body[this._PARAMS_SCHOOL_CONTACT] || null;
+
+
+
+        this._SUBJECT_CONTENT = format(EmailMessaging.MEMBERSHIP_SUBJECT, this._subject)
+        this._HTML_CONTENT = format(EmailMessaging.MEMBERSHIP_CONTENT_HTML, this._body);
+        this._TEXT_CONTENT = format(EmailMessaging.MEMBERSHIP_CONTENT_TEXT, this._body);
     }
 
     async getRegistrationEmail() {
