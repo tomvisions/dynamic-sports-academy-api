@@ -63,7 +63,7 @@ export class MailMapper {
                 this._params.Source = 'tomc@tomvisions.com';
                 this._params.ReplyToAddresses = [];
                 this._params.Template = 'ContactUs';
-                await this.getMembershipEmail();
+                await this.getMembershipEmail(body);
                 this._params.TemplateData = `{\"PHONE_CONTENT\":\"${this._phone}\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Info\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
                 break;
 
@@ -102,7 +102,7 @@ export class MailMapper {
         this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN = body[this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN] || null;
         this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE = body[this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE] || null;
         this._PARAMS_SCHOOL_CONTACT = body[this._PARAMS_SCHOOL_CONTACT] || null;
-
+        this._PARAMS_FORMER_CLUB = body[this._PARAMS_FORMER_CLUB] || null;
 
 
         this._SUBJECT_CONTENT = format(EmailMessaging.MEMBERSHIP_SUBJECT, this._subject)
