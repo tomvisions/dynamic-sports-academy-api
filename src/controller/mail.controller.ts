@@ -8,11 +8,15 @@ export class MailController {
     static async apiPostSendMail(req: any, res: any, next: any) {
 
         let params = {
+            "contact_us" :  [
+                mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL, mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_BODY, mailMapper.PARAMS_PHONE
+            ],
             "membership" :  [
-                mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL, mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_BIRTHDAY, mailMapper.PARAMS_NHIS, mailMapper.PARAMS_RESIDENTAL_ADDRESS, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE, mailMapper.PARAMS_SCHOOL, mailMapper.PARAMS_CLASS_OR_FORM, mailMapper.PARAMS_SCHOOL_CONTACT, mailMapper.PARAMS_FORMER_CLUB
+             //   mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL, mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_BIRTHDAY, mailMapper.PARAMS_NHIS, mailMapper.PARAMS_RESIDENTAL_ADDRESS, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE, mailMapper.PARAMS_SCHOOL, mailMapper.PARAMS_CLASS_OR_FORM, mailMapper.PARAMS_SCHOOL_CONTACT, mailMapper.PARAMS_FORMER_CLUB
+                mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL
             ],
             "academy" : [
-                mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_NAME, mailMapper.PARAMS_TEAM_NAME, mailMapper.PARAMS_EMAIL
+                mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_NAME
             ]
         }
 

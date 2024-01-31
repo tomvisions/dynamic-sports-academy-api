@@ -58,13 +58,22 @@ export class MailMapper {
         await this.parseBody(body);
 
         switch (this._emailType) {
-            case EmailMessaging.EMAIL_TYPE_MEMBERSHIP:
+            case EmailMessaging.EMAIL_TYPE_CONTACT_US:
                 this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
                 this._params.Source = 'tomc@tomvisions.com';
                 this._params.ReplyToAddresses = [];
                 this._params.Template = 'ContactUs';
                 await this.getMembershipEmail(body);
-                this._params.TemplateData = `{\"PHONE_CONTENT\":\"${this._phone}\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Info\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
+                this._params.TemplateData = `{\"PHONE_CONTENT\":\"${this._phone}\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Kwasi\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
+                break;
+
+            case EmailMessaging.EMAIL_TYPE_MEMBERSHIP:
+                this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
+                this._params.Source = 'tomc@tomvisions.com';
+                this._params.ReplyToAddresses = [];
+                this._params.Template = 'Membership';
+                await this.getMembershipEmail(body);
+                this._params.TemplateData = `{\"PHONE_CONTENT\":\"${this._phone}\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Kwasi\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
                 break;
 
             case EmailMessaging.EMAIL_TYPE_TOURNAMENT_REGISTRATION:
@@ -74,7 +83,7 @@ export class MailMapper {
                 this._params.ReplyToAddresses = [];
                 this._params.Template = 'TournamentRegistration';
                 await this.getRegistrationEmail();
-                this._params.TemplateData = `{\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Info\",\"TEAM_NAME_CONTENT\":\"${this._teamName}\", \"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
+                this._params.TemplateData = `{\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Kwasi\",\"TEAM_NAME_CONTENT\":\"${this._teamName}\", \"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
                 break;
 
         }

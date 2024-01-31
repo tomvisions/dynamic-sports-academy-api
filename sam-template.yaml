@@ -1,0 +1,166 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless Express Application/API powered by API Gateway and Lambda
+Parameters:
+    ParentDomainName:
+        Type: String
+        Description: API Domain name
+        Default: "dynamic-sports-academy.com"
+    DomainName:
+        Type: String
+        Description: API Domain name
+        Default: $DomainName
+    RecordName:
+        Type: String
+        Description: API Domain name
+        Default: $RecordName
+    Certificate:
+        Type: String
+        Description: Certificate
+        Default: $Certificate
+    BucketNameImages:
+        Type: String
+        Description: Bucket for Images
+        Default: $BucketNameImages
+    Stage:
+        Type: String
+        Description: Bucket for Images
+        Default: $Stage
+    NodeEnv:
+        Type: String
+        Description: Bucket for Images
+        Default: Stage
+
+Conditions:
+    UseDomainName: !Not
+        - !Equals
+            - !Ref DomainName
+            - ''
+    UseCertificate: !Not
+        - !Equals
+            - !Ref Certificate
+            - ''
+
+Resources:
+    ExpressApi:
+        Type: AWS::Serverless::Api
+        Properties:
+            StageName: !Ref Stage
+            BinaryMediaTypes:
+                - image/png
+                - image/jpg
+                - image/jpeg
+                - multipart/form-data
+
+    ExpressLambdaFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./dist
+            PackageType: Zip
+            Runtime: nodejs18.x
+            Handler: lambda.handler
+            Environment:
+                Variables:
+                    NODE_ENV: !Ref NodeEnv
+            MemorySize: 1024
+            Timeout: 30
+            Events:
+                Mail:
+                    Type: Api
+                    Properties:
+                        RestApiId: !Ref ExpressApi
+                        Path: /api/v1/mail
+                        Method: ANY
+
+            Policies:
+                - SESBulkTemplatedCrudPolicy_v2:
+                      IdentityName: dynamic-sports-academy.com
+                      TemplateName: ContactUs
+                - SESBulkTemplatedCrudPolicy_v2:
+                      IdentityName: dynamic-sports-academy.com
+                      TemplateName: Membership
+                - SESBulkTemplatedCrudPolicy_v2:
+                      IdentityName: dynamic-sports-academy.com
+                      TemplateName: Academy
+                - SESBulkTemplatedCrudPolicy_v2:
+                      IdentityName: tomc@tomvisions.com
+                      TemplateName: ContactUs
+                - SESBulkTemplatedCrudPolicy_v2:
+                      IdentityName: tomc@tomvisions.com
+                      TemplateName: Membership
+                - SESBulkTemplatedCrudPolicy_v2:
+                      IdentityName: tomc@tomvisions.com
+                      TemplateName: Academy
+                - SESEmailTemplateCrudPolicy: {}
+                - S3WritePolicy:
+                      BucketName: !Ref BucketNameImages
+
+
+    MyApiRoute53RecordSetGroup:
+        Type: AWS::Route53::RecordSetGroup
+        Condition: UseDomainName
+        Properties:
+            HostedZoneName: !Sub ${ParentDomainName}.
+            RecordSets:
+                - Name: !Sub "${DomainName}."
+                  Type: A
+                  AliasTarget:
+                      EvaluateTargetHealth: true
+                      HostedZoneId: Z2FDTNDATAQYW2
+                      DNSName: !Sub ${Distribution.DomainName}.
+
+    Distribution:
+        Type: AWS::CloudFront::Distribution
+        Properties:
+            DistributionConfig:
+                Enabled: "true"
+                Comment: !Ref AWS::StackName
+                Aliases: 
+                    - !Ref DomainName
+                CNAMEs:
+                    - !Ref DomainName
+                ViewerCertificate: 
+                        AcmCertificateArn: arn:aws:acm:us-east-1:957180890197:certificate/74af1aa3-32cc-412a-9489-e061ab8f7387
+                        SslSupportMethod: sni-only
+                HttpVersion: http2
+                Origins:
+                  - DomainName: !Sub "${ExpressApi}.execute-api.${AWS::Region}.amazonaws.com"
+                    OriginPath: !Sub "/${Stage}"
+                    Id: ApiOrigin
+                    CustomOriginConfig:
+                        HTTPPort: 80
+                        HTTPSPort: 443
+                        OriginProtocolPolicy: https-only
+                DefaultCacheBehavior:
+                    Compress: "true"
+                    AllowedMethods:
+                        - GET
+                        - HEAD
+                        - OPTIONS
+                        - PUT
+                        - POST
+                        - PATCH
+                        - DELETE
+                    TargetOriginId: ApiOrigin
+                    ViewerProtocolPolicy: "allow-all"
+                    CachePolicyId: "4cb0e116-9693-420b-ab1f-62a4b0c9c17f"
+                    OriginRequestPolicyId: "b689b0a8-53d0-40ab-baf2-68738e2966ac"
+
+Outputs:
+    LambdaFunctionConsoleUrl:
+        Description: Console URL for the Lambda Function.
+        Value: !Sub https://${AWS::Region}.console.aws.amazon.com/lambda/home?region=${AWS::Region}#/functions/${ExpressLambdaFunction}
+
+    ApiGatewayApiConsoleUrl:
+        Description: Console URL for the API Gateway API's Stage.
+        Value: !Sub https://${AWS::Region}.console.aws.amazon.com/apigateway/home?region=${AWS::Region}#/apis/${ExpressApi}/stages/${Stage}
+
+    ApiUrl:
+        Description: Invoke URL for your API. Clicking this link will perform a GET request
+            on the root resource of your API.
+        Value: !Sub https://${ExpressApi}.execute-api.${AWS::Region}.amazonaws.com/
+
+    LambdaFunctionName:
+        Description: Name of the Serverless Express Lambda Function
+        Value: !Ref ExpressLambdaFunction

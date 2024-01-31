@@ -2,7 +2,7 @@ import cors from "cors";
 import express, { Request, Response } from "express";
 import compression from "compression";
 const app = express();
-import {mailRouter} from './routes';
+import {mailRouter, playerRouter} from './routes';
 import bodyparser from 'body-parser';
 
 
@@ -22,6 +22,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use("/api/v1/mail", mailRouter);
+app.use("/api/player", playerRouter);
 
 app.use("/", express);
 export { app };
