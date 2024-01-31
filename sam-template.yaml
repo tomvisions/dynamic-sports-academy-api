@@ -70,8 +70,12 @@ Resources:
                     Type: Api
                     Properties:
                         RestApiId: !Ref ExpressApi
-                        Path: /api/v1/mail
+                        Path: /api/mail
                         Method: ANY
+                        RestApiId: !Ref ExpressApi
+                        Path: /api/player
+                        Method: ANY
+
 
             Policies:
                 - SESBulkTemplatedCrudPolicy_v2:

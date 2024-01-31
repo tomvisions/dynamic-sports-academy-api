@@ -21,7 +21,7 @@ app.use(async (req, res, next) => {
   next()
 });
 
-app.use("/api/v1/mail", mailRouter);
+app.use("/api/mail", mailRouter);
 app.use("/api/player", playerRouter);
 
 app.use("/", express);
