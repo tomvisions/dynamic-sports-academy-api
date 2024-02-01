@@ -60,7 +60,7 @@ export class PlayerController {
     }
 
     public static async apiGetPlayers(req: any, res: any, next: any) {
-        console.log('inside of add player to ddd')
+        console.log('inside of add player to dddddd')
         //   if (!eventMapper.checkAuthenication(req.headers.authorization)) {
           //     return res.status(500).json({error: 'Not Authorized to access the API'})
           // }

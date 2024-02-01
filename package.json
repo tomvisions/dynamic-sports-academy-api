@@ -33,7 +33,7 @@
     "setup-production": "yarn install && (cross-var aws s3api get-bucket-location --bucket $npm_package_config_s3BucketNameProduction --region $npm_package_config_region || npm run create-bucket-production) && npm run package-deploy-production",
     "deploy-stage": "npm run environment && npm run build && npm run package-deploy-stage",
     "deploy-production": "npm run environment && npm run build && npm run package-deploy-production",
-    "environment": "cross-env MONGO_DATABASE=MONGO_DATABASE NODE_ENV=$NODE_ENV HOST=$HOST USERNAME=$USERNAME PASSWORD=$PASSWORD DATABASE=$DATABASE TOKEN_SECRET=$TOKEN_SECRET DISTRIBUTION_ID=$DISTRIBUTION_ID"
+    "environment": "cross-env MONGO_DATABASE=$MONGO_DATABASE NODE_ENV=$NODE_ENV HOST=$HOST USERNAME=$USERNAME PASSWORD=$PASSWORD DATABASE=$DATABASE TOKEN_SECRET=$TOKEN_SECRET DISTRIBUTION_ID=$DISTRIBUTION_ID"
   },
   "author": "",
   "license": "ISC",
