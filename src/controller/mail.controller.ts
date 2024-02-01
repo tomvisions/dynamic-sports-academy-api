@@ -24,23 +24,11 @@ export class MailController {
         const missingParam = [];
         let valid = true;
         try {
-            console.log('type');
-            console.log(typeof req.body);
             const paramCheck:string[] = params[req.body[mailMapper.PARAMS_EMAIL_TYPE]]
-            console.log('the check');
-            console.log(paramCheck);
-            console.log('the body');
-            console.log(req.body);
  
             Object.values((paramCheck)).map((param:string)   => {
-                console.log('the param');
-                console.log(param);
-                console.log(typeof param);
-                console.log(req.body[param]); 
                 if (!req.body[param]) {
                     valid = false;
-                    console.log('bad param');
-                    console.log(param);
                     missingParam.push(param);
                 }
             });
