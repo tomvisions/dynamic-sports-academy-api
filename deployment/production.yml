@@ -16,13 +16,6 @@ phases:
   build:
     commands:
       - echo "In the building process"
-      - echo $DB_INFO
-      - echo "the username"
-      - export DB_USERNAME=$(echo "$DB_INFO" | jq -r '.DB_USERNAME')
-      - echo $DB_USERNAME
-      - export DB_HOST=$(echo "$DB_INFO" | jq -r '.DB_HOST')
-      - export DB_PASSWORD=$(echo "$DB_INFO" | jq -r '.DB_PASSWORD')
-      - export DB_NAME=$(echo "$DB_INFO" | jq -r '.DB_NAME')
- #   TOKEN_SECRET: $TOKEN_SECRE
+      - export MONGO_DATABASE=$(echo "$DB_INFO" | jq -r '.MONDODB')
       - export NODE_ENV=$(echo "$DB_INFO" | jq -r '.NODE_ENV')
       - npm run deploy-production
