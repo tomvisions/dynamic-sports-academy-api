@@ -92,6 +92,10 @@ Resources:
                 - SESBulkTemplatedCrudPolicy_v2:
                       IdentityName: tomc@tomvisions.com
                       TemplateName: DefaultEmailTemplate
+                - SESBulkTemplatedCrudPolicy_v2:
+                      IdentityName: tcruicksh@gmail.com
+                      TemplateName: DefaultEmailTemplate
+
                 - SESEmailTemplateCrudPolicy: {}
                 - S3WritePolicy:
                       BucketName: !Ref BucketNameImages
