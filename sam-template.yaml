@@ -88,22 +88,7 @@ Resources:
             Policies:
                 - SESBulkTemplatedCrudPolicy_v2:
                       IdentityName: dynamic-sports-academy.com
-                      TemplateName: ContactUs
-                - SESBulkTemplatedCrudPolicy_v2:
-                      IdentityName: dynamic-sports-academy.com
-                      TemplateName: Membership
-                - SESBulkTemplatedCrudPolicy_v2:
-                      IdentityName: dynamic-sports-academy.com
-                      TemplateName: Academy
-                - SESBulkTemplatedCrudPolicy_v2:
-                      IdentityName: tomc@tomvisions.com
-                      TemplateName: ContactUs
-                - SESBulkTemplatedCrudPolicy_v2:
-                      IdentityName: tomc@tomvisions.com
-                      TemplateName: Membership
-                - SESBulkTemplatedCrudPolicy_v2:
-                      IdentityName: tomc@tomvisions.com
-                      TemplateName: Academy
+                      TemplateName: DefaultEmailTemplate
                 - SESEmailTemplateCrudPolicy: {}
                 - S3WritePolicy:
                       BucketName: !Ref BucketNameImages

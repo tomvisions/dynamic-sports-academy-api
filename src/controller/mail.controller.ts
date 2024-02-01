@@ -13,7 +13,7 @@ export class MailController {
             ],
             "membership" :  [
              //   mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL, mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_BIRTHDAY, mailMapper.PARAMS_NHIS, mailMapper.PARAMS_RESIDENTAL_ADDRESS, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE, mailMapper.PARAMS_SCHOOL, mailMapper.PARAMS_CLASS_OR_FORM, mailMapper.PARAMS_SCHOOL_CONTACT, mailMapper.PARAMS_FORMER_CLUB
-                mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL
+                mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL, mailMapper.PARAMS_EMAIL_TYPE
             ],
             "academy" : [
                 mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_NAME
@@ -24,6 +24,7 @@ export class MailController {
         let valid = true;
         try {
             Object.values(params[req.body[mailMapper.PARAMS_EMAIL_TYPE]]).map((param)   => {
+                console.log(param);
 
                 if (!req.body[param+'']) {
                     valid = false;
