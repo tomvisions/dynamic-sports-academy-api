@@ -34,7 +34,7 @@ Parameters:
     MongoDatabase:
         Type: String
         Description: Bucket for Images
-        Default: Stage
+        Default: $MongoDatabase
 
 
 Conditions:
