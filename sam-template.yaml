@@ -89,6 +89,9 @@ Resources:
                 - SESBulkTemplatedCrudPolicy_v2:
                       IdentityName: dynamic-sports-academy.com
                       TemplateName: DefaultEmailTemplate
+                - SESBulkTemplatedCrudPolicy_v2:
+                      IdentityName: tomc@tomvisions.com
+                      TemplateName: DefaultEmailTemplate
                 - SESEmailTemplateCrudPolicy: {}
                 - S3WritePolicy:
                       BucketName: !Ref BucketNameImages
