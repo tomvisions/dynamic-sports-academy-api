@@ -25,7 +25,8 @@ export class MailController {
         let valid = true;
         try {
             const paramCheck:string[] = params[req.body[mailMapper.PARAMS_EMAIL_TYPE]]
- 
+            console.log('the param check');
+            console.log(paramCheck);    
             Object.values((paramCheck)).map((param:string)   => {
                 if (!req.body[param]) {
                     valid = false;
