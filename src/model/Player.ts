@@ -1,5 +1,5 @@
 import {Schema} from "mongoose";
-import {mongoose, mongooseLive} from "../db/Mongoose";
+import {mongoose} from "../db/Mongoose";
 
 export interface EventOptions {
     name: String,

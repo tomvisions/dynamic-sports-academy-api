@@ -71,8 +71,8 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 const mongoose = Mongoose.createConnection(process.env.MONGO_DATABASE, options);
-const mongooseLive = Mongoose.createConnection(process.env.MONGO_LIVE_DATABASE, options);
+//const mongooseLive = Mongoose.createConnection(process.env.MONGO_LIVE_DATABASE, options);
 
 
 //console.log(mongoose);
-export {mongoose, mongooseLive, Model, Schema};
+export {mongoose, Model, Schema};
