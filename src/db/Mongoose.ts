@@ -59,8 +59,6 @@ export class MongooseApi {
     };
 }
 
-console.log('the processes');
-console.log(process.env);
 let options;
 if (process.env.NODE_ENV === 'dev') {
     options = { useNewUrlParser: true, useUnifiedTopology: true }

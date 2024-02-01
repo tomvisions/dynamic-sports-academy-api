@@ -1,11 +1,12 @@
 import {mailMapper} from "../mapper";
 
 import {inspect} from "util";
-
+import { ServerResponse } from "http";
+import { Request } from "express";
 const util = require('util');
 
 export class MailController {
-    static async apiPostSendMail(req: any, res: any, next: any) {
+    static async apiPostSendMail(req: Request, res: any, next: any) {
 
         let params = {
             "contact_us" :  [
@@ -23,11 +24,23 @@ export class MailController {
         const missingParam = [];
         let valid = true;
         try {
-            Object.values(params[req.body[mailMapper.PARAMS_EMAIL_TYPE]]).map((param)   => {
+            console.log('type');
+            console.log(typeof req.body);
+            const paramCheck:string[] = params[req.body[mailMapper.PARAMS_EMAIL_TYPE]]
+            console.log('the check');
+            console.log(paramCheck);
+            console.log('the body');
+            console.log(req.body);
+ 
+            Object.values((paramCheck)).map((param:string)   => {
+                console.log('the param');
                 console.log(param);
-
-                if (!req.body[param+'']) {
+                console.log(typeof param);
+                console.log(req.body[param]); 
+                if (!req.body[param]) {
                     valid = false;
+                    console.log('bad param');
+                    console.log(param);
                     missingParam.push(param);
                 }
             });

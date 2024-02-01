@@ -128,8 +128,8 @@ export class MailMapper {
     }
 
     async formatBody(body) {
-        console.log('the body');
-        console.log(body);
+      //  console.log('the body');
+      //  console.log(body);
         Object.keys(body).map((key) => {
             this._PARAMS_CONTENT = this._PARAMS_CONTENT.concat(format(EmailMessaging.PARAMS_CONTENT, key, body[key]));
         
@@ -165,14 +165,14 @@ export class MailMapper {
 
     async getJoinAcademyEmail(body) {
 
-        this._PARAMS_NAME = body[this._PARAMS_NAME] || null;
+  /*      this._PARAMS_NAME = body[this._PARAMS_NAME] || null;
         this._PARAMS_PHONE = body[this._PARAMS_PHONE] || null;
         this._PARAMS_EMAIL = body[this._PARAMS_EMAIL] || null;
         this._PARAMS_DATE_OF_BIRTH = body[this._PARAMS_DATE_OF_BIRTH] || null;
         this._PARAMS_RESIDENTAL_ADDRESS = body[this._PARAMS_RESIDENTAL_ADDRESS] || null;
         this._PARAMS_CITY = body[this._PARAMS_CITY] || null;
         this._PARAMS_COUNTRY = body[this._PARAMS_COUNTRY] || null;
-        
+        */
         this._SUBJECT_CONTENT = EmailMessaging.ACADEMY_SUBJECT;
         this._HTML_CONTENT = format(EmailMessaging.ACADEMY_CONTENT_HTML);
         this._TEXT_CONTENT = format(EmailMessaging.ACADEMY_CONTENT_TEXT);
@@ -180,6 +180,10 @@ export class MailMapper {
 
 
     async apiSendMail() {
+        console.log('the params')
+        console.log(this._params);
+        console.log('resuts')
+        console.log(await this._sesClient.send(new SendTemplatedEmailCommand(this._params)));
         return await this._sesClient.send(new SendTemplatedEmailCommand(this._params));
     }
 
