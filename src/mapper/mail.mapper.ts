@@ -93,6 +93,7 @@ export class MailMapper {
     async formatBody(body) {
       //  console.log('the body');
       //  console.log(body);
+        this._PARAMS_CONTENT = '';
         Object.keys(body).map((key) => {
             this._PARAMS_CONTENT = this._PARAMS_CONTENT.concat(format(EmailMessaging.PARAMS_CONTENT, key, body[key]));
         
