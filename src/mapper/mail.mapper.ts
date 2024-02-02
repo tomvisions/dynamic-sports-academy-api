@@ -60,34 +60,32 @@ export class MailMapper {
     async prepareEmail(body) {
         this._params = emailParams;
         await this.parseBody(body);
+        this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
+        this._params.Source = 'info@dynamic-sports-academy.com';
+        this._params.ReplyToAddresses = [];
+        this._params.Template = 'DefaultEmailTemplate';
 
+        
         switch (this._emailType) {
             case EmailMessaging.EMAIL_TYPE_CONTACT_US:
-                this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
-                this._params.Source = 'info@dynamic-sports-academy.com';
-                this._params.ReplyToAddresses = [];
-                this._params.Template = 'DefaultEmailTemplate';
-                await this.getContactUsEmail(body);
+                this._SUBJECT_CONTENT = EmailMessaging.CONTACTUS_SUBJECT;
+                this._HTML_CONTENT = EmailMessaging.CONTACTUS_CONTENT_HTML;
+                this._TEXT_CONTENT = EmailMessaging.CONTACTUS_CONTENT_TEXT;
                 this._params.TemplateData = `{\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Kwasi\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
                 break;
 
             case EmailMessaging.EMAIL_TYPE_MEMBERSHIP:
-                this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
-                this._params.Source = 'info@dynamic-sports-academy.com';
-                this._params.ReplyToAddresses = [];
-                this._params.Template = 'DefaultEmailTemplate';
-                await this.getMembershipEmail(body);
+                await this.formatBody(body);
+                this._SUBJECT_CONTENT = EmailMessaging.MEMBERSHIP_SUBJECT;
+                this._HTML_CONTENT = EmailMessaging.MEMBERSHIP_CONTENT_HTML;
+                this._TEXT_CONTENT = EmailMessaging.MEMBERSHIP_CONTENT_TEXT;
                 this._params.TemplateData = `{\"PHONE_CONTENT\":\"${this._phone}\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Kwasi\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
                 break;
 
             case EmailMessaging.EMAIL_TYPE_ACADEMY:
-                this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
-                this._params.Source = 'info@dynamic-sports-academy.com';
-                this._params.ReplyToAddresses = [];
-                this._params.Template = 'DefaultEmailTemplate';
-                this._subject = 'Email About Joining Academy'
-                await this.formatBody(body);
-                await this.getJoinAcademyEmail(body);
+                this._SUBJECT_CONTENT = EmailMessaging.ACADEMY_SUBJECT;
+                this._HTML_CONTENT = EmailMessaging.ACADEMY_CONTENT_HTML;
+                this._TEXT_CONTENT = EmailMessaging.ACADEMY_CONTENT_TEXT;
                 this._params.TemplateData = `{\"NAME\":\"Kwasi\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"PARAMS_CONTENT\":\"${this._PARAMS_CONTENT}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
                 break;
 
@@ -111,22 +109,6 @@ export class MailMapper {
 
 
 
-
-    async getContactUsEmail(body) {
-
-        this._PARAMS_NHIS = body[this._PARAMS_NHIS] || null;
-        this._PARAMS_BIRTHDAY = body[this._PARAMS_BIRTHDAY] || null;
-        this._PARAMS_RESIDENTAL_ADDRESS = body[this._PARAMS_RESIDENTAL_ADDRESS] || null;
-        this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN = body[this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN] || null;
-        this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE = body[this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE] || null;
-        this._PARAMS_SCHOOL_CONTACT = body[this._PARAMS_SCHOOL_CONTACT] || null;
-        this._PARAMS_FORMER_CLUB = body[this._PARAMS_FORMER_CLUB] || null;
-
-        this._SUBJECT_CONTENT = format(EmailMessaging.MEMBERSHIP_SUBJECT, this._subject)
-        this._HTML_CONTENT = format(EmailMessaging.CONTACTUS_CONTENT_HTML, this._body);
-        this._TEXT_CONTENT = format(EmailMessaging.CONTACTUS_CONTENT_TEXT, this._body);
-    }
-
     async formatBody(body) {
       //  console.log('the body');
       //  console.log(body);
@@ -141,41 +123,8 @@ export class MailMapper {
   //          console.log(item);
             //    format(EmailMessaging.MEMBERSHIP_CONTENT_HTML, this._body);
      //   });
-     console.log(this._PARAMS_CONTENT);
+    // console.log(this._PARAMS_CONTENT);
 
-    }
-
-    async getMembershipEmail(body) {
-        this._PARAMS_NAME = body[this._PARAMS_NAME] || null;
-        this._PARAMS_EMAIL = body[this._PARAMS_EMAIL] || null;
-        this._PARAMS_BIRTHDAY = body[this._PARAMS_BIRTHDAY] || null;
-        this._PARAMS_PLACE_OF_BIRTH = body[this._PARAMS_PLACE_OF_BIRTH] || null;
-        this._PARAMS_NHIS = body[this._PARAMS_NHIS] || null;
-        this._PARAMS_RESIDENTAL_ADDRESS = body[this._PARAMS_RESIDENTAL_ADDRESS] || null;
-        this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN = body[this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN] || null;
-        this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE = body[this._PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE] || null;
-        this._PARAMS_SCHOOL = body[this._PARAMS_SCHOOL] || null;
-        this._PARAMS_SCHOOL_CONTACT = body[this._PARAMS_SCHOOL_CONTACT] || null;
-        this._PARAMS_FORMER_CLUB = body[this._PARAMS_FORMER_CLUB] || null;
-
-        this._SUBJECT_CONTENT = format(EmailMessaging.MEMBERSHIP_SUBJECT, this._subject)
-        this._HTML_CONTENT = format(EmailMessaging.MEMBERSHIP_CONTENT_HTML, this._body);
-        this._TEXT_CONTENT = format(EmailMessaging.MEMBERSHIP_CONTENT_TEXT, this._body);
-    }
-
-    async getJoinAcademyEmail(body) {
-
-  /*      this._PARAMS_NAME = body[this._PARAMS_NAME] || null;
-        this._PARAMS_PHONE = body[this._PARAMS_PHONE] || null;
-        this._PARAMS_EMAIL = body[this._PARAMS_EMAIL] || null;
-        this._PARAMS_DATE_OF_BIRTH = body[this._PARAMS_DATE_OF_BIRTH] || null;
-        this._PARAMS_RESIDENTAL_ADDRESS = body[this._PARAMS_RESIDENTAL_ADDRESS] || null;
-        this._PARAMS_CITY = body[this._PARAMS_CITY] || null;
-        this._PARAMS_COUNTRY = body[this._PARAMS_COUNTRY] || null;
-        */
-        this._SUBJECT_CONTENT = EmailMessaging.ACADEMY_SUBJECT;
-        this._HTML_CONTENT = format(EmailMessaging.ACADEMY_CONTENT_HTML);
-        this._TEXT_CONTENT = format(EmailMessaging.ACADEMY_CONTENT_TEXT);
     }
 
 

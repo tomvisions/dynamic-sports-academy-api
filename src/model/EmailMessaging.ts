@@ -8,23 +8,20 @@ export class EmailMessaging
     static EMAIL_TYPE_ACADEMY = 'academy';
 
 
-    static CONTACTUS_SUBJECT = '%s';
-    static CONTACTUS_CONTENT_TEXT = `You have received a message from the Contact Us Form:\\n%s`;
-    static CONTACTUS_CONTENT_HTML = '<p>You have received a message from the Contact Us Form:</p><p>%s</p>';
+    static CONTACTUS_SUBJECT = 'Email From Contact Us';
+    static CONTACTUS_CONTENT_TEXT = `You have received a message from the Contact Us Form:\\n`;
+    static CONTACTUS_CONTENT_HTML = '<p>You have received a message from the Contact Us Form:</p>';
 
 
 
-    static MEMBERSHIP_SUBJECT = '%s';
-    static MEMBERSHIP_CONTENT_TEXT = `You have received a message from the Membership Form:\\n%s`;
-    static MEMBERSHIP_CONTENT_HTML = '<p>You have received a message from the Membership Form:</p><p>%s</p>';
+    static MEMBERSHIP_SUBJECT = 'Email From Membership';
+    static MEMBERSHIP_CONTENT_TEXT = `You have received a message from the Membership Form:\\n`;
+    static MEMBERSHIP_CONTENT_HTML = '<p>You have received a message from the Membership Form:</p>';
     static PARAMS_CONTENT = '<p>%s: %s</p>';
 
-
     static ACADEMY_SUBJECT = 'Email From Join Academy';
-    static ACADEMY_CONTENT_TEXT = `You have received a message from the Join Academy Form:\\n%s`;
-    static ACADEMY_CONTENT_HTML = '<p>You have received a message from the Join Academy Form:</p><p>%s</p>';
+    static ACADEMY_CONTENT_TEXT = `You have received a message from the Join Academy Form:\\n`;
+    static ACADEMY_CONTENT_HTML = '<p>You have received a message from the Join Academy Form:</p>';
 
-    static REGISTRATION_CONTENT_TEXT = `You have received a new registration from the Registration Form.`;
-    static REGISTRATION_CONTENT_HTML = '<p>You have received a new registration from the Registration Form.</p>';
 
 }
