@@ -59,7 +59,8 @@ export class MailMapper {
      */
     async prepareEmail(body) {
         this._params = emailParams;
-        await this.parseBody(body);
+       
+        await this.formatBody(body);
         this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
         this._params.Source = 'info@dynamic-sports-academy.com';
         this._params.ReplyToAddresses = [];
@@ -75,7 +76,6 @@ export class MailMapper {
                 break;
 
             case EmailMessaging.EMAIL_TYPE_MEMBERSHIP:
-                await this.formatBody(body);
                 this._SUBJECT_CONTENT = EmailMessaging.MEMBERSHIP_SUBJECT;
                 this._HTML_CONTENT = EmailMessaging.MEMBERSHIP_CONTENT_HTML;
                 this._TEXT_CONTENT = EmailMessaging.MEMBERSHIP_CONTENT_TEXT;
@@ -94,18 +94,6 @@ export class MailMapper {
 
 
   //  mailMapper.PARAMS_NAME, mailMapper.PARAMS_EMAIL_TYPE, mailMapper.PARAMS_BIRTHDAY, mailMapper.PARAMS_NHIS, mailMapper.PARAMS_RESIDENTAL_ADDRESS, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN, mailMapper.PARAMS_NAME_OF_PARENTS_OR_GUARDIAN_PHONE, mailMapper.PARAMS_SCHOOL, mailMapper.PARAMS_CLASS_OR_FORM, mailMapper.PARAMS_SCHOOL_CONTACT, mailMapper.PARAMS_FORMER_CLUB
-
-
-    async parseBody(body) {
-        this._body = body[this._PARAMS_BODY] || null;
-        this._subject = body[this._PARAMS_SUBJECT] || null;
-        this._emailType = body[this._PARAMS_EMAIL_TYPE] || null;
-        this._phone = body[this._PARAMS_PHONE] || null;
-        this._name = body[this._PARAMS_NAME] || null
-        this._email = body[this._PARAMS_EMAIL] || null;
-        this._teamName = body[this._PARAMS_TEAM_NAME] || null;
-
-    }
 
 
 
