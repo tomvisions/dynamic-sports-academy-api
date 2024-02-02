@@ -14,13 +14,7 @@ export interface Params {
 export class MailMapper {
     private _sesClient;
     private _REGION: string = 'us-east-1'
-    private _body: string;
-    private _subject: string;
     private _emailType: string;
-    private _phone: string;
-    private _name;
-    private _email;
-    private _teamName
     private _params;
     private _SUBJECT_CONTENT;
     private _HTML_CONTENT;
@@ -65,9 +59,8 @@ export class MailMapper {
         this._params.Source = 'info@dynamic-sports-academy.com';
         this._params.ReplyToAddresses = [];
         this._params.Template = 'DefaultEmailTemplate';
-
-        
-        switch (this._emailType) {
+    
+        switch (body[this._PARAMS_EMAIL_TYPE]) {
             case EmailMessaging.EMAIL_TYPE_CONTACT_US:
                 this._SUBJECT_CONTENT = EmailMessaging.CONTACTUS_SUBJECT;
                 this._HTML_CONTENT = EmailMessaging.CONTACTUS_CONTENT_HTML;
@@ -117,8 +110,6 @@ export class MailMapper {
 
 
     async apiSendMail() {
-        console.log('the params');
-        console.log(this._params);
         return await this._sesClient.send(new SendTemplatedEmailCommand(this._params));
     }
 
