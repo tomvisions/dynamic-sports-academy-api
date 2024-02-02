@@ -64,7 +64,7 @@ export class MailMapper {
         switch (this._emailType) {
             case EmailMessaging.EMAIL_TYPE_CONTACT_US:
                 this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
-                this._params.Source = 'tomc@tomvisions.com';
+                this._params.Source = 'info@dynamic-sports-academy.com';
                 this._params.ReplyToAddresses = [];
                 this._params.Template = 'DefaultEmailTemplate';
                 await this.getContactUsEmail(body);
@@ -73,7 +73,7 @@ export class MailMapper {
 
             case EmailMessaging.EMAIL_TYPE_MEMBERSHIP:
                 this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
-                this._params.Source = 'tomc@tomvisions.com';
+                this._params.Source = 'info@dynamic-sports-academy.com';
                 this._params.ReplyToAddresses = [];
                 this._params.Template = 'DefaultEmailTemplate';
                 await this.getMembershipEmail(body);
@@ -82,7 +82,7 @@ export class MailMapper {
 
             case EmailMessaging.EMAIL_TYPE_ACADEMY:
                 this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
-                this._params.Source = 'tomc@tomvisions.com';
+                this._params.Source = 'info@dynamic-sports-academy.com';
                 this._params.ReplyToAddresses = [];
                 this._params.Template = 'DefaultEmailTemplate';
                 this._subject = 'Email About Joining Academy'
