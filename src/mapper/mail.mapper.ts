@@ -71,7 +71,7 @@ export class MailMapper {
                 this._SUBJECT_CONTENT = EmailMessaging.CONTACTUS_SUBJECT;
                 this._HTML_CONTENT = EmailMessaging.CONTACTUS_CONTENT_HTML;
                 this._TEXT_CONTENT = EmailMessaging.CONTACTUS_CONTENT_TEXT;
-                this._params.TemplateData = `{\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Kwasi\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
+                this._params.TemplateData = `{\"NAME\":\"Kwasi\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"PARAMS_CONTENT\":\"${this._PARAMS_CONTENT}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
                 break;
 
             case EmailMessaging.EMAIL_TYPE_MEMBERSHIP:
@@ -79,7 +79,7 @@ export class MailMapper {
                 this._SUBJECT_CONTENT = EmailMessaging.MEMBERSHIP_SUBJECT;
                 this._HTML_CONTENT = EmailMessaging.MEMBERSHIP_CONTENT_HTML;
                 this._TEXT_CONTENT = EmailMessaging.MEMBERSHIP_CONTENT_TEXT;
-                this._params.TemplateData = `{\"PHONE_CONTENT\":\"${this._phone}\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"NAME_CONTENT\":\"${this._name}\", \"NAME\":\"Kwasi\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"EMAIL_CONTENT\":\"${this._email}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
+                this._params.TemplateData = `{\"NAME\":\"Kwasi\",\"SUBJECT_CONTENT\":\"${this._SUBJECT_CONTENT}\",\"HTML_CONTENT\":\"${this._HTML_CONTENT}\",\"PARAMS_CONTENT\":\"${this._PARAMS_CONTENT}\",  \"TEXT_CONTENT\":\"${this._TEXT_CONTENT}\"}`;
                 break;
 
             case EmailMessaging.EMAIL_TYPE_ACADEMY:
