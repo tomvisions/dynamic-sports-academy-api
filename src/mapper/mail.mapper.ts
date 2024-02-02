@@ -56,6 +56,7 @@ export class MailMapper {
        
         await this.formatBody(body);
         this._params.Destination.ToAddresses.push('tcruicksh@gmail.com');
+        this._params.Destination.ToAddresses.push('info@dynamic-sports-academy.com');
         this._params.Source = 'info@dynamic-sports-academy.com';
         this._params.ReplyToAddresses = [];
         this._params.Template = 'DefaultEmailTemplate';
